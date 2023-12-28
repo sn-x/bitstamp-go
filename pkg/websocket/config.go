@@ -6,16 +6,19 @@ import (
 
 const bitstampWsUrl = "wss://ws.bitstamp.net"
 const wsTimeout = 60 * time.Second
+const skipVerifyTLS = false
 
 type wsClientConfig struct {
-	domain  string
-	timeout time.Duration
+	domain        string
+	timeout       time.Duration
+	skipVerifyTLS bool
 }
 
 func defaultWsClientConfig() *wsClientConfig {
 	return &wsClientConfig{
-		domain:  bitstampWsUrl,
-		timeout: wsTimeout,
+		domain:        bitstampWsUrl,
+		timeout:       wsTimeout,
+		skipVerifyTLS: skipVerifyTLS,
 	}
 }
 
@@ -30,5 +33,11 @@ func WsUrl(domain string) WsOption {
 func Timeout(timeout time.Duration) WsOption {
 	return func(config *wsClientConfig) {
 		config.timeout = timeout
+	}
+}
+
+func SkipVerifyTLS(skipVerifyTLS bool) WsOption {
+	return func(config *wsClientConfig) {
+		config.skipVerifyTLS = skipVerifyTLS
 	}
 }

@@ -1,6 +1,7 @@
 package websocket
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"sync"
@@ -38,7 +39,9 @@ func NewWsClient(options ...WsOption) (*WsClient, error) {
 	}
 
 	// set up websocket
-	ws, _, err := websocket.DefaultDialer.Dial(c.domain, nil)
+	dialer := *websocket.DefaultDialer
+	dialer.TLSClientConfig = &tls.Config{InsecureSkipVerify: c.skipVerifyTLS}
+	ws, _, err := dialer.Dial(c.domain, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error dialing websocket: %s", err)
 	}
