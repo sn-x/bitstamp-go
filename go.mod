@@ -1,8 +1,9 @@
-module github.com/bitstonks/bitstamp-go
+module github.com/sn-x/bitstamp-go
 
 go 1.18
 
 require (
+	github.com/bitstonks/bitstamp-go v0.0.2
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/shopspring/decimal v1.3.1
