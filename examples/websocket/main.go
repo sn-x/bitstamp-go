@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/bitstonks/bitstamp-go/pkg/websocket"
 	"log"
 	"time"
+
+	"github.com/bitstonks/bitstamp-go/pkg/websocket"
 )
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 
 			}
 		}
-	}
+	}()
 
 	time.Sleep(3 * time.Second)
 
